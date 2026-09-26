@@ -1,3 +1,5 @@
 .quarto/
 *.qmd.json
 .DS_Store
+/.quarto/
+**/*.quarto_ipynb
