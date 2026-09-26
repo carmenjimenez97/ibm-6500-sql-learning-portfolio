@@ -162,3 +162,8 @@ The most important concepts I learned were `SELECT`, `WHERE`, aggregate function
 SQL could be useful for the CEP project because customer survey data can be organized in tables and analyzed systematically. SQL would allow me to identify patterns in customer satisfaction, intention to revisit, and willingness to recommend.
 
 Overall, this course increased my confidence in working with databases and prepared me for more advanced topics such as BigQuery and intermediate SQL.
+
+## Appendix: Publication Links
+
+- [GitHub Repository](https://github.com/carmenjimenez97/ibm-6500-sql-learning-portfolio)
+- [Published Introduction to SQL Report](https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/introduction-to-sql.html)
