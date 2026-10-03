@@ -1,0 +1,333 @@
+---
+title: "Introduction to BigQuery: Course Completion and Learning Notes"
+author: "Carmen Jimenez"
+date: "2026-10-03"
+
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    embed-resources: true
+---
+
+## Course-Completion Evidence
+
+I completed the DataCamp course "Introduction to BigQuery" on October 3, 2026. The certificate below confirms my successful completion of the four-hour course.
+
+![](images/introduction-to-bigquery-certificate.png){width=90%}
+
+## Learning Notes and Key Takeaways
+
+## BigQuery Architecture and Structure
+
+### Main Ideas
+
+One of the first things I learned is that BigQuery is made for analyzing very large amounts of data. What stood out to me is that BigQuery separates storage from computing power. I understood this as BigQuery being able to use more computing resources when a query needs them, without me having to manage servers myself.
+
+I also learned that BigQuery is more focused on analytical work than on daily transactions. For example, it can be useful for reports, large queries, or exploring customer and marketing data.
+
+### BigQuery Terminology and Procedures
+
+Some of the terms that I want to remember from this part of the course are:
+
+- OLAP: BigQuery is an online analytical processing system, so it is mainly used for analysis.
+- Serverless: Google manages the infrastructure and computing resources.
+- Columnar storage: BigQuery stores information by columns, which can make analytical queries faster.
+- Capacitor: The columnar storage format used by BigQuery.
+- Colossus: Google's distributed storage system.
+- Jupiter: Helps move data between storage and computing resources.
+- Dremel: The engine that runs and organizes queries.
+- Borg: Helps manage and allocate computing resources.
+
+There were many new names in this section, so I think this is one of the parts I may need to review again later.
+
+### Important SQL Syntax
+
+A simple query I practiced was:
+
+```sql
+SELECT *
+FROM ecommerce.ecomm_order_details
+LIMIT 3;
+```
+
+### Example Explanation
+
+This query shows all the columns from the ecomm_order_details table, but only returns three rows. I found LIMIT useful because it lets me quickly look at a dataset before working with a much larger amount of data.
+
+I also learned that BigQuery table names can include the project, dataset, and table name. When the query is being run inside the default project, sometimes only the dataset and table name are needed.
+
+### CEP Application
+
+For my CEP, I can see BigQuery being useful if I have to work with a larger amount of restaurant, customer, survey, or website data. For example, different sources of RKR information could be stored and analyzed without having to manage the computing infrastructure myself.
+
+This also helped me understand why organizing the data correctly before analyzing it is important.
+
+## BigQuery Data Organization
+
+### Main Ideas
+
+Another important part of the course was learning how BigQuery organizes data. The structure goes from project, to dataset, and then to table.
+
+The project is the highest level. Inside the project there can be different datasets, and inside each dataset there are tables with the actual data.
+
+I also learned that the region of a dataset matters. Once a dataset is created in a region, the location cannot simply be changed, and BigQuery does not directly query data across different regions. This was something I did not think about before taking the course.
+
+### BigQuery Terminology and Procedures
+
+The main terms I want to remember are:
+
+- Project: The highest level used to organize BigQuery resources.
+- Dataset: A group of related tables.
+- Table: Where the actual data is stored.
+- Region: The physical location where the dataset is stored.
+- Multi-region: A larger geographic area, such as the United States or the European Union.
+
+A full BigQuery table name can follow this structure:
+
+project.dataset.table
+
+### Important SQL Syntax
+
+One example from the course was using DISTINCT to find unique values:
+
+```sql
+SELECT DISTINCT seller_city
+FROM ecommerce.ecomm_sellers;
+```
+
+### Example Explanation
+
+This query returns the different cities found in the seller_city column without repeating the same city many times.
+
+I liked this example because it is simple, but it shows how SQL can help explore a dataset before doing a deeper analysis.
+
+### CEP Application
+
+For my CEP, I could use this type of organization to keep different sources of information separate but still organized in the same project.
+
+For example, survey responses, restaurant data, website analytics, and other customer information could be stored in different tables or datasets. I think this would make the project easier to understand and also easier to analyze later.
+
+## Writing Queries and Data Types
+
+### Main Ideas
+
+This part of the course felt more familiar to me because I had already worked with some basic SQL before. I learned that BigQuery uses GoogleSQL, so many of the commands are similar to regular SQL, but BigQuery also has its own functions and ways of working with different types of data.
+
+I practiced selecting columns, limiting results, grouping information, joining tables, and working with dates and timestamps. This section helped me understand how BigQuery can be used for actual analysis instead of only storing data.
+
+### BigQuery Terminology and Procedures
+
+Some of the concepts I want to remember from this section are:
+
+- GoogleSQL: The SQL dialect used in BigQuery.
+- JOIN: Combines information from different tables.
+- GROUP BY: Groups rows so the data can be summarized.
+- DATE and TIMESTAMP: Data types used for dates and time.
+- EXTRACT: Pulls a specific part of a date, such as the month, year, or quarter.
+- TIMESTAMP_ADD and TIMESTAMP_SUB: Add or subtract time from a timestamp.
+- FORMAT_TIMESTAMP: Changes how a timestamp is displayed.
+
+### Important SQL Syntax
+
+One query I practiced was:
+
+```sql
+SELECT
+  order_id,
+  SUM(payment_value)
+FROM ecommerce.ecomm_payments
+GROUP BY order_id
+ORDER BY SUM(payment_value)
+LIMIT 10;
+```
+
+### Example Explanation
+
+This query groups the payment data by order_id and calculates the total payment amount for each order. Then it sorts the results from the lowest total to the highest and only shows the first ten results.
+
+I liked this example because it combines several commands in one query and helped me see how SQL can be used to summarize a large dataset.
+
+### CEP Application
+
+For my CEP, I could use similar queries to summarize restaurant, survey, or customer data. For example, I could group information by customer, visit, or time period and then compare the results.
+
+The date and timestamp functions could also be useful if I want to compare activity by week, month, or semester and see how customer behavior changes over time.
+
+## Data Ingestion in BigQuery
+
+### Main Ideas
+
+This part of the course focused on how data can actually be loaded into BigQuery before it is analyzed. I learned that there are different ways to import data depending on where the file is stored and how much control is needed during the process.
+
+The three main methods covered were BigQuery Studio, the bq command line tool, and the LOAD DATA SQL command.
+
+### BigQuery Terminology and Procedures
+
+Some of the main things I want to remember are:
+
+- BigQuery Studio: The interface in Google Cloud where data can be uploaded and managed.
+- bq command line tool: A command line option that can be used to load data, run queries, and manage BigQuery resources.
+- LOAD DATA: A SQL command used to load files from Google Cloud Storage into a BigQuery table.
+- Schema: The structure of a table, including the fields and data types.
+- Schema autodetection: BigQuery can try to identify the structure of a file automatically.
+- Google Cloud Storage: A place where files can be stored before loading them into BigQuery.
+
+The file formats introduced in the course included CSV, JSON, Avro, ORC, and Parquet.
+
+### Important SQL Syntax
+
+One example of loading data into BigQuery is:
+
+```sql
+LOAD DATA INTO mydataset.table
+FROM FILES(
+  uris = ['gs://bucket/path/file.csv'],
+  format = 'CSV'
+);
+```
+
+### Example Explanation
+
+This command loads a CSV file stored in Google Cloud Storage into a BigQuery table.
+
+The uris part tells BigQuery where the file is located, and format = 'CSV' tells BigQuery what type of file it is.
+
+One thing I learned is that LOAD DATA cannot be used directly with a file stored only on a local computer. For local files, BigQuery Studio or the `bq` command line tool can be used instead.
+
+### CEP Application
+
+For my CEP, this could be useful if I have data from different sources that needs to be brought into one place before I analyze it.
+
+For example, survey responses, restaurant data, or digital marketing data could be exported as CSV files and then loaded into BigQuery. Once the data is there, I could organize it into tables and use SQL to analyze it more easily.
+
+## Arrays, UNNEST, and CTEs
+
+### Main Ideas
+
+This was one of the parts of the course that was more challenging for me because the data was not always stored in a simple row-and-column format. I learned that BigQuery can store nested information inside arrays, and UNNEST is used when I need to work with the individual values inside those arrays.
+
+I also practiced CTEs using WITH. I found them useful because they let me break a longer query into smaller parts instead of trying to do everything in one query.
+
+### BigQuery Terminology and Procedures
+
+Some of the concepts I want to remember are:
+
+- ARRAY: Stores multiple values inside one field.
+- STRUCT: Groups related values together inside a record.
+- UNNEST: Opens an array so that the individual items can be queried.
+- Dot notation: Allows access to a field inside a nested structure, such as items.price.
+- CTE: A temporary result created with `WITH` that can be used later in the same query.
+
+### Important SQL Syntax
+
+One example I practiced was using UNNEST to access product information inside order_items:
+
+```sql
+SELECT
+  order_id,
+  items.product_id,
+  items.price
+FROM ecommerce.ecomm_orders,
+UNNEST(order_items) items
+WHERE items.price > 100;
+```
+
+### Example Explanation
+
+The order_items column contains nested information. UNNEST(order_items) opens that array and gives the alias items, which allows me to access fields such as items.product_id and items.price.
+
+The WHERE condition then keeps only the products with a price greater than 100.
+
+This was useful because it showed me how BigQuery can work with more complex data structures instead of only traditional flat tables.
+
+### CEP Application
+
+For my CEP, this could be useful if a dataset contains several responses, purchases, menu items, or customer interactions inside one record.
+
+Using UNNEST would allow me to separate those values and analyze them individually. CTEs could also help me keep longer analyses organized and make the SQL easier for me to understand when I return to it later.
+
+## Aggregate and Approximate Functions
+
+### Main Ideas
+
+This section showed me different ways to summarize large datasets in BigQuery. I already knew some basic aggregate functions like SUM, COUNT, and AVG, but this course introduced more specific functions that can be useful when the dataset is very large or when I need a more specialized summary.
+
+I also learned that BigQuery has approximate functions that can return results faster on very large datasets. These are useful when an exact answer is not necessary and performance is more important.
+
+### BigQuery Terminology and Procedures
+
+Some of the functions I want to remember are:
+
+- COUNTIF: Counts rows only when a condition is true.
+- HAVING: Filters grouped or aggregated results.
+- ANY_VALUE: Returns one value from a group and can also be combined with conditions such as `HAVING MAX`.
+- LOGICAL_AND: Returns true when all values in a group meet a condition.
+- LOGICAL_OR: Returns true when at least one value in a group meets a condition.
+- STRING_AGG: Combines text values into one string.
+- ARRAY_CONCAT_AGG: Combines arrays from multiple rows.
+- APPROX_COUNT_DISTINCT: Estimates the number of unique values.
+- APPROX_TOP_COUNT: Finds the most frequent values approximately.
+- APPROX_QUANTILES: Divides values into approximate quantile groups.
+- APPROX_TOP_SUM: Finds the values with the highest approximate summed amounts.
+
+### Important SQL Syntax
+
+One example I practiced was using `COUNTIF`:
+
+```sql
+SELECT
+  product_category_name_english,
+  COUNTIF(product_weight_g > 5000)
+FROM ecommerce.ecomm_products
+GROUP BY product_category_name_english;
+```
+
+I also practiced approximate aggregation:
+
+```sql
+SELECT
+  items.product_id,
+  APPROX_COUNT_DISTINCT(od.customer_id) AS estimated_unique_customers
+FROM ecommerce.ecomm_orders o,
+UNNEST(o.order_items) items
+JOIN ecommerce.ecomm_order_details od
+USING (order_id)
+GROUP BY items.product_id;
+```
+
+### Example Explanation
+
+The first query counts how many products in each category weigh more than 5,000 grams. I found COUNTIF useful because it combines counting and filtering in one function.
+
+The second query estimates the number of unique customers associated with each product. Instead of calculating an exact distinct count, APPROX_COUNT_DISTINCT gives an approximate result that can be faster when working with very large datasets.
+
+This section helped me understand that BigQuery has functions designed specifically for large-scale analysis, not only the basic SQL functions I had used before.
+
+### CEP Application
+
+For my CEP, aggregate functions could help summarize customer satisfaction, survey responses, transactions, or digital marketing metrics.
+
+For example, I could count how many responses meet a certain condition, calculate averages by customer group, combine text feedback, or estimate unique customers when working with a very large dataset.
+
+I think these functions would be especially useful when I need to turn detailed data into a smaller summary that is easier to interpret and present.
+
+## Overall Reflection and Future Reference
+
+Overall, this course helped me understand that using BigQuery is more than just writing SQL. Before this course, I mainly thought about SQL as a way to query tables, but BigQuery also involves understanding how data is stored, organized, loaded, and processed in a cloud environment.
+
+The most useful concepts for me were learning how projects, datasets, and tables are organized, how to use UNNEST with nested data, and how aggregate functions can summarize large amounts of information. I also found the date and timestamp functions useful because they could be applied to reports that compare activity over time.
+
+The most challenging parts for me were arrays, nested data, CTEs, and some of the approximate aggregate functions. These were new concepts, so I needed more practice to understand how they work together inside a query.
+
+For digital marketing and customer analytics, I can see BigQuery being useful for combining and analyzing data from different sources. For example, it could be used with survey data, website analytics, customer behavior, or restaurant data. For my CEP, it could help me organize larger datasets and create summaries that are easier to analyze and present.
+
+In the future, I will probably need to review UNNEST, CTEs, date functions, and approximate aggregate functions again. I also want to remember the structure of project.dataset.table because it is an important part of working in BigQuery.
+
+# Appendix: Publication Links
+
+- [GitHub Repository](https://github.com/carmenjimenez97/ibm-6500-sql-learning-portfolio)
+- [Published Introduction to BigQuery Report](https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/introduction-to-bigquery.html)
