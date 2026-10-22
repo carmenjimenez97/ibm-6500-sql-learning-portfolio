@@ -10,8 +10,10 @@ author: "Carmen Jimenez Rodriguez"
 
 This portfolio contains my DataCamp course-completion evidence and learning notes for SQL and BigQuery.
 
+
 ## Reports
 
 - [Introduction to SQL](introduction-to-sql.html)
-- Introduction to BigQuery (to be completed)
-- Intermediate SQL (to be completed)
+- [Introduction to BigQuery](introduction-to-bigquery.html)
+- [Intermediate SQL](intermediate-sql.html)
+
