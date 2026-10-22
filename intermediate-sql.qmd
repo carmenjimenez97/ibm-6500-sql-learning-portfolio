@@ -1,0 +1,256 @@
+
+---
+title: "Intermediate SQL: Course Completion and Learning Notes"
+author: "Carmen Lia Jimenez Rodriguez"
+date: today
+editor: visual
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    embed-resources: true
+---
+
+
+
+# Intermediate SQL – Learning Portfolio
+
+
+**Student:** Carmen Lia Jimenez Rodriguez
+
+**Course:** IBM 6500 - Customer Insight Methods & Survey Research
+
+**Professor:** Dr. Jae Min Jung
+
+**University:** California State Polytechnic University, Pomona
+
+**Program:** Master of Science in Digital Marketing & Analytics
+
+**Learning Platform:** DataCamp
+
+**Submission Date:** October 21, 2026
+
+---
+
+
+
+##  Introduction
+
+As part of my Master's program in Digital Marketing & Analytics at Cal Poly Pomona, I recently completed the Intermediate SQL course on DataCamp.
+
+After taking Introduction to SQL and Introduction to BigQuery, this course helped me build on what I had already learned and become more comfortable working with data.
+
+One thing I found especially useful was learning how to filter and organize information based on different conditions. I also practiced grouping data, calculating averages, and creating new categories to make the results easier to understand.
+
+I know these skills will be useful in marketing analytics, where understanding customer behavior and evaluating performance are important. I can also see how SQL could help me analyze customer feedback and other business data in my Capstone project with The Restaurant at Kellogg Ranch (RKR).
+
+
+##  Course Completion Evidence
+
+I completed the Intermediate SQL course on DataCamp in October 2026. Throughout the course, I worked on exercises that helped me practice writing SQL queries and understand how to use them to answer different questions.
+
+![Intermediate SQL Certificate](images/intermediate-sql-certificate.png)
+
+Completing this course helped me feel more confident using SQL, and I look forward to applying what I learned in future projects.
+
+
+##  What I Learned in Intermediate SQL
+
+Throughout this course, I learned how to write SQL queries that go beyond simply selecting information from a database. I practiced filtering data, combining conditions, creating new categories, and calculating summary statistics.
+
+The following sections summarize some of the concepts I found most useful.
+
+###  Filtering Data with Multiple Conditions
+
+One of the first things I practiced was using `WHERE` to filter data based on specific conditions.
+
+I learned that `AND` is useful when all conditions must be true, while `OR` allows a row to be included when at least one condition is true.
+
+For example, in one of the DataCamp exercises, I worked with a Fortune 50 dataset to identify technology companies headquartered outside California.
+
+```sql
+SELECT company,
+       rank_2025,
+       sector,
+       state
+FROM fortune_50
+WHERE sector = 'Technology'
+  AND state != 'CA';
+```
+
+This example helped me understand how combining conditions allows us to focus on a specific group of companies.
+
+I also learned to use `IN` instead of writing several `OR` conditions when filtering for multiple values.
+
+### Complex Filtering
+
+In this section, I learned how to combine different conditions using parentheses.
+
+One important lesson was that SQL evaluates `AND` before `OR`, so parentheses help ensure that the query follows the intended logic.
+
+For example, I practiced identifying retail companies that ranked among the top 20 in 2025 or had revenue above $50 billion.
+
+```sql
+SELECT company,
+       rank_2025,
+       sector,
+       revenue
+FROM fortune_50
+WHERE sector = 'Retail'
+  AND (rank_2025 <= 20 OR revenue > 50000);
+```
+
+This exercise showed me why grouping conditions correctly is important. Without parentheses, the query could return companies that do not meet all the requirements.
+
+### Conditional Transformation with CASE WHEN
+
+Another useful concept was `CASE WHEN`, which allows us to create categories based on specific conditions.
+
+In the course, I worked with flight data and learned how to classify aircraft according to the number of seats.
+
+```sql
+SELECT flight_id,
+       airline,
+       total_seats,
+       CASE
+           WHEN total_seats >= 300 THEN 'Widebody'
+           ELSE 'Narrowbody'
+       END AS aircraft_size
+FROM flights;
+```
+
+I found this particularly interesting because it allows us to transform numerical information into categories that are easier to interpret.
+
+In marketing analytics, I could use a similar approach to classify customers into different groups based on their behavior or responses.
+
+### Conditional Aggregation
+
+This was one of the most useful parts of the course for me.
+
+I learned how to combine `CASE WHEN` with aggregate functions such as `COUNT()`, `AVG()`, and `SUM()` to calculate metrics for specific groups.
+
+For example, I practiced calculating the number of long-haul flights and their average distance.
+
+```sql
+SELECT plane_type,
+       COUNT(flight_id) AS flight_count,
+       COUNT(CASE
+           WHEN distance > 3000 THEN flight_id
+       END) AS longhaul_flight_count,
+       AVG(CASE
+           WHEN distance > 3000 THEN distance
+       END) AS avg_distance_longhaul
+FROM flights
+WHERE flight_status != 'canceled'
+GROUP BY plane_type;
+```
+
+This helped me understand how to calculate different metrics within the same query without removing information that may be useful for other calculations.
+
+I also learned the difference between `WHERE` and `HAVING`. While `WHERE` filters individual rows before grouping, `HAVING` filters groups after aggregation.
+
+
+##  Applications to Marketing Analytics and RKR
+
+One of the reasons I wanted to improve my SQL skills is that data analysis plays an important role in digital marketing. Understanding how to organize information, identify patterns, and calculate useful metrics can help businesses make better decisions.
+
+As I worked through the Intermediate SQL exercises, I started thinking about how these techniques could be useful in my Capstone project with The Restaurant at Kellogg Ranch (RKR).
+
+### Analyzing Customer Satisfaction
+
+One of my responsibilities in the RKR project is to better understand the guest experience through a customer survey.
+
+The survey is designed to evaluate areas such as food quality, service quality, atmosphere, and overall satisfaction.
+
+If the survey responses were available in a database, SQL could help me organize the information and calculate average ratings for different aspects of the dining experience.
+
+For example, the following query illustrates how I could summarize customer satisfaction.
+
+```sql
+SELECT
+    AVG(food_quality) AS avg_food_quality,
+    AVG(service_quality) AS avg_service_quality,
+    AVG(atmosphere) AS avg_atmosphere,
+    AVG(overall_satisfaction) AS avg_overall_satisfaction
+FROM rkr_survey;
+```
+
+This is a hypothetical example, not a query executed with actual RKR survey data. It assumes that the survey responses are stored in a table with these column names.
+
+### Identifying Improvement Opportunities
+
+Another way I could use SQL is to identify which areas receive lower satisfaction ratings.
+
+For example, `CASE WHEN` could help classify survey responses into different satisfaction categories.
+
+```sql
+SELECT
+    CASE
+        WHEN overall_satisfaction >= 4 THEN 'High Satisfaction'
+        WHEN overall_satisfaction = 3 THEN 'Neutral'
+        ELSE 'Low Satisfaction'
+    END AS satisfaction_category,
+    COUNT(*) AS response_count
+FROM rkr_survey
+GROUP BY satisfaction_category;
+```
+
+This type of analysis could help me understand the distribution of satisfaction levels and identify areas that may need attention.
+
+### Supporting Marketing Decisions
+
+Beyond customer surveys, I can also see how SQL could support digital marketing analysis.
+
+For example, SQL could be useful for comparing website traffic sources, evaluating engagement, or summarizing campaign performance.
+
+Learning to use `WHERE`, `GROUP BY`, `HAVING`, and conditional aggregation has helped me understand how different questions can be answered using the same dataset.
+
+Although I am still developing my SQL skills, I now feel more comfortable thinking about how to turn business questions into data analysis tasks.
+
+
+##  Personal Reflection and Key Takeaways
+
+Completing Intermediate SQL was another important step in developing my data analytics skills. At the beginning, I was still getting used to writing SQL queries and understanding how different commands work together. As I completed more exercises, I started to feel more comfortable reading queries and identifying which conditions I needed to use.
+
+One of the most challenging parts for me was combining multiple conditions correctly, especially when using AND, OR, and parentheses. I also needed more practice understanding the difference between WHERE and HAVING. Working through the examples helped me see why the order of operations matters and how small changes in a query can affect the results.
+
+The topic I found particularly useful was conditional aggregation. Learning how to combine CASE WHEN with COUNT, SUM, and AVG showed me that I could calculate different metrics from the same dataset without creating separate queries for every question.
+
+This course also helped me understand that working with data is not only about writing code. It is about knowing what question I want to answer, selecting the right information, and checking whether the results make sense.
+
+As I continue my Master's in Digital Marketing & Analytics, I want to keep practicing SQL and become more confident applying it to real datasets. I am especially interested in using these skills to better understand customer experiences, evaluate marketing performance, and support business decisions.
+
+
+##  Conclusion
+
+Completing Introduction to SQL, Introduction to BigQuery, and Intermediate SQL has helped me build a stronger foundation in data analytics. Throughout these courses, I learned how to organize, filter, transform, and summarize data, but more importantly, I started to understand how these skills can help answer real business questions.
+
+One of the things that motivates me to continue learning SQL is my Capstone project with The Restaurant at Kellogg Ranch (RKR). My part of the project focuses on understanding the guest experience through customer surveys, including food quality, service, atmosphere, and overall satisfaction.
+
+I can see how SQL could help me organize survey responses, compare satisfaction ratings, and identify areas where the restaurant is performing well or where improvements may be needed. Although I have not yet applied SQL directly to the RKR survey data, this course has helped me better understand how I could use it in the future.
+
+I still have a lot to learn, but I feel more confident than when I started these courses. I want to continue improving my technical skills and learning how to use data to make meaningful recommendations, especially in digital marketing and hospitality.
+
+
+
+
+## Appendix: Publication Links
+
+This report is part of my IBM 6500 SQL Learning Portfolio, which includes Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.
+
+**GitHub Repository:**
+
+https://github.com/carmenjimenez97/ibm-6500-sql-learning-portfolio
+
+**GitHub Pages Portfolio:**
+
+https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/
+
+**Intermediate SQL Report:**
+
+https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/intermediate-sql.html
+
+
