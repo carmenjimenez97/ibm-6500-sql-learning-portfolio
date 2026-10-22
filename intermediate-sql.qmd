@@ -237,20 +237,22 @@ I still have a lot to learn, but I feel more confident than when I started these
 
 
 
+
 ## Appendix: Publication Links
 
 This report is part of my IBM 6500 SQL Learning Portfolio, which includes Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.
 
 **GitHub Repository:**
 
-https://github.com/carmenjimenez97/ibm-6500-sql-learning-portfolio
+[View my GitHub Repository](https://github.com/carmenjimenez97/ibm-6500-sql-learning-portfolio)
 
 **GitHub Pages Portfolio:**
 
-https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/
+[View my SQL Learning Portfolio](https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/)
 
 **Intermediate SQL Report:**
 
-https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/intermediate-sql.html
+[View my Intermediate SQL Report](https://carmenjimenez97.github.io/ibm-6500-sql-learning-portfolio/intermediate-sql.html)
+
 
 
